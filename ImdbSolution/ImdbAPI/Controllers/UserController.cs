@@ -25,6 +25,10 @@ namespace IronFit.Api.Controllers
         [AllowAnonymous]
         public IActionResult RegisterUser([FromBody] UserForRegisterDto userForRegisterDto)
         {
+            var admin = VerificarAdmin();
+
+            if (!admin) return Forbid();
+
             _userService.RegisterUser(userForRegisterDto);
 
             return Created($"{nameof(UserController)}", new {});
@@ -52,6 +56,13 @@ namespace IronFit.Api.Controllers
             _userService.InactivateUser();
 
             return Ok();
+        }
+
+        private bool VerificarAdmin()
+        {
+            var admin = bool.Parse(User.FindFirst("Admin").Value);
+
+            return admin;
         }
     }
 }

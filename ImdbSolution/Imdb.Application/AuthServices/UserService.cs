@@ -46,11 +46,15 @@ namespace IronFit.Application.AuthServices
 
         public void RegisterUser(UserForRegisterDto userForRegisterDto)
         {
-            var admin = _mapper.Map<User>(userForRegisterDto);
+            var userDb = _userRepository.GetByUsername(userForRegisterDto.Username);
 
-            admin.PasswordHash = _authService.GeneratePasswordHash(userForRegisterDto.Password);
+            if (userDb != null) throw new CoreException("Username já cadastrado!");
 
-            _userRepository.Create(admin);
+            var user = _mapper.Map<User>(userForRegisterDto);
+
+            user.PasswordHash = _authService.GeneratePasswordHash(userForRegisterDto.Password);
+
+            _userRepository.Create(user);
 
             _unityOfWork.Commit();
         }
