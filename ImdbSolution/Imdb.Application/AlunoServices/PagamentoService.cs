@@ -34,12 +34,12 @@ namespace IronFit.Application.AlunoServices
 
             if (aluno is null) throw new CoreException("Aluno não encontrado para realizar Pagamento.");
 
-            var pagamentoExiste = _pagamentoRepository.ExistePagamentoData(pagamentoDto.MesReferencia,
-                pagamentoDto.AnoReferencia, pagamentoDto.IdAluno);
-
-            if (pagamentoExiste) throw new CoreException("Já existe um pagamento para o Mês e Ano informado.");
-
             var pagamento = _mapper.Map<Pagamento>(pagamentoDto);
+
+            if (pagamentoDto.MesInteiro)
+            {
+                pagamento.QuantidadeDias = DateTime.DaysInMonth(pagamentoDto.AnoReferencia, pagamentoDto.MesReferencia);
+            }
 
             pagamento.DataPagamento = DateTime.Now;
 

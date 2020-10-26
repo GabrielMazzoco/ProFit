@@ -6,6 +6,7 @@ namespace IronFit.Domain.AlunoAggregate.Services
     public interface IAlunoService
     {
         IEnumerable<AlunoDto> BuscarTodos();
+        IEnumerable<AlunoForGetDto> BuscarTodosPorNome(string nome);
         AlunoDto Buscar(int id);
         void Criar(AlunoDto alunoDto);
         void Atualizar(AlunoDto alunoDto);

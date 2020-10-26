@@ -9,6 +9,7 @@ namespace IronFit.Domain.AlunoAggregate.Entidades
         public decimal Valor { get; set; }
         public int MesReferencia { get; set; }
         public int AnoReferencia { get; set; }
+        public int QuantidadeDias { get; set; }
 
         public int IdAluno { get; set; }
 

@@ -18,7 +18,7 @@ export const ROUTES: RouteInfo[] = [
     admin: true
   },
   { path: '/icons', title: 'Icons', icon: 'ni-planet text-blue', class: '', admin: false },
-  { path: '/maps', title: 'Maps', icon: 'ni-pin-3 text-orange', class: '', admin: false },
+  // { path: '/maps', title: 'Maps', icon: 'ni-pin-3 text-orange', class: '', admin: false },
   {
     path: '/user-profile',
     title: 'User profile',
@@ -27,24 +27,31 @@ export const ROUTES: RouteInfo[] = [
     admin: false
   },
   {
-    path: '/tables',
-    title: 'Tables',
-    icon: 'ni-bullet-list-67 text-red',
+    path: '/aluno',
+    title: 'Alunos',
+    icon: 'ni-single-02 text-black',
     class: '',
     admin: false
   },
-  { path: '/login', title: 'Login', icon: 'ni-key-25 text-info', class: '', admin: false },
-  {
-    path: '/register',
-    title: 'Register',
-    icon: 'ni-circle-08 text-pink',
-    class: '',
-    admin: false
-  },
+  // {
+  //   path: '/tables',
+  //   title: 'Tables',
+  //   icon: 'ni-bullet-list-67 text-red',
+  //   class: '',
+  //   admin: false
+  // },
+  // { path: '/login', title: 'Login', icon: 'ni-key-25 text-info', class: '', admin: false },
   {
     path: '/modalidade',
     title: 'Modalidades',
     icon: 'ni-fat-add text-orange',
+    class: '',
+    admin: true
+  },
+  {
+    path: '/register',
+    title: 'Registrar Funcionário',
+    icon: 'ni-circle-08 text-pink',
     class: '',
     admin: true
   }

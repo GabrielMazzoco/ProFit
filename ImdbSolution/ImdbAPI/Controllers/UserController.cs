@@ -22,7 +22,6 @@ namespace IronFit.Api.Controllers
         /// </summary>
         /// <response code="201"></response>
         [HttpPost]
-        [AllowAnonymous]
         public IActionResult RegisterUser([FromBody] UserForRegisterDto userForRegisterDto)
         {
             var admin = VerificarAdmin();

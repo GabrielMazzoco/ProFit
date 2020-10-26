@@ -1,0 +1,149 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+              </div>
+              <input #searchInput class="form-control" placeholder="Search" type="text" (focus)="focus = true"
+              (blur)="focus = false">
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+        </div>
+        <div class="col-xl-3 col-lg-6">
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <button class="btn btn-white" (click)="open()">Matricular Aluno</button>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #classic3 let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title-default">Matricular Aluno</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d(false)">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-nome">Nome</label>
+              <input [(ngModel)]="aluno.nome" name="nome" type="text" id="input-nome" 
+                class="form-control form-control-alternative" placeholder="Nome" disabled="{{editar}}">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-cpf">Cpf</label>
+              <input [(ngModel)]="aluno.cpf" name="cpf" type="text" id="input-cpf" 
+                class="form-control form-control-alternative" placeholder="Cpf">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-cpf">Data Nascimento</label>
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                </div>
+                <input class="form-control datepicker" placeholder="Select date" name="dataNascimento" [(ngModel)]="aluno.dataNascimentoPicker" 
+                  ngbDatepicker #g="ngbDatepicker" (click)="g.toggle()" type="text" id="dataNascimento" [minDate]="{year: 1910, month: 1, day: 1}"
+                  [maxDate]="{year: 2020, month: 12, day: 31}" disabled="{{editar}}"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-cpf">Data Matrícula</label>
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                </div>
+                <input class="form-control datepicker" placeholder="Select date" name="dataMatricula" [(ngModel)]="aluno.dataMatriculaPicker" 
+                  ngbDatepicker #h="ngbDatepicker" (click)="h.toggle()" type="text" id="dataMatricula" [minDate]="{year: 1910, month: 1, day: 1}"
+                  [maxDate]="{year: 2030, month: 12, day: 31}" disabled="{{editar}}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-control-label" for="input-modalidade">Modalidade</label>
+            <select id="input-modalidade" [(ngModel)]="aluno.idModalidade" name="idModalidade" class="browser-default custom-select">
+              <option value="0">Modalidade</option>
+              <option *ngFor="let item of modalidades" value="{{item.id}}">{{item.nome}}</option>
+            </select>
+          </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c(false)">Close</button>
+      <button type="button" class="btn btn-primary" (click)="salvar();c(false)">Save changes</button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Alunos</h3>
+        </div>
+        <div class="table">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Modalidade</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of alunos">
+                <th style="width: 40%;" scope="row">
+                  {{item.nome}}
+                </th>
+                <td style="width: 25%;">
+                  {{item.modalidade}}
+                </td>
+                <td style="width: 25%;">
+                  {{(item.active) ? 'Ativo' : 'Inativo'}}
+                </td>
+                <td style="width: 10%;" class="text-right">
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                      <a class="dropdown-item" (click)="abrirModalEditar(item.id)">Editar</a>
+                      <!-- <a class="dropdown-item" (click)="inativarModalidade(item.id)">Inativar</a> -->
+                      <!-- <a class="dropdown-item" href="javascript:void(0)">Something else here</a> -->
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

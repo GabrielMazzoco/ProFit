@@ -19,6 +19,7 @@ import { UserService } from './services/user.service';
 import { environment } from 'src/environments/environment';
 import { ModalidadeService } from './services/modalidade.service';
 import { Interceptor } from './services/interceptor';
+import { AlunoService } from './services/aluno.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -51,6 +52,7 @@ export function tokenGetter() {
     AuthService,
     UserService,
     ModalidadeService,
+    AlunoService,
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
   ],
   bootstrap: [AppComponent]

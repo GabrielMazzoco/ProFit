@@ -18,6 +18,8 @@ namespace IronFit.Adapter.Data.Mappings
 
             builder.Property(x => x.AnoReferencia).IsRequired();
 
+            builder.Property(x => x.QuantidadeDias).IsRequired();
+
             builder.Property(x => x.IdAluno).IsRequired();
 
             builder.HasOne(x => x.Aluno)

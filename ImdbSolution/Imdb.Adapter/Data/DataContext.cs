@@ -1,5 +1,7 @@
 ﻿using IronFit.Adapter.Data.Mappings;
+using IronFit.Domain.AuthAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
+using BC = BCrypt.Net.BCrypt;
 
 namespace IronFit.Adapter.Data
 {
@@ -14,6 +16,26 @@ namespace IronFit.Adapter.Data
             modelBuilder.ApplyConfiguration(new AvaliacaoMap());
             modelBuilder.ApplyConfiguration(new ModalidadeMap());
             modelBuilder.ApplyConfiguration(new PagamentoMap());
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 1,
+                Active = true,
+                Admin = true,
+                Name = "Gabriel Mazzoco",
+                UserName = "mazzoco",
+                PasswordHash = BC.HashPassword("mazzoco")
+            });
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 2,
+                Active = true,
+                Admin = true,
+                Name = "Brenner Mazzoco",
+                UserName = "brenner",
+                PasswordHash = BC.HashPassword("mazzoco")
+            });
         }
     }
 }

@@ -13,6 +13,7 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalidadeComponent } from 'src/app/pages/modalidade/modalidade.component';
+import { AlunoComponent } from 'src/app/pages/aluno/aluno.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ModalidadeComponent } from 'src/app/pages/modalidade/modalidade.compone
     TablesComponent,
     IconsComponent,
     MapsComponent,
-    ModalidadeComponent
+    ModalidadeComponent,
+    AlunoComponent
   ]
 })
 
