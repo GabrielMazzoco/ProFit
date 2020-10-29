@@ -16,6 +16,9 @@ namespace IronFit.Adapter.Data.Mappings
 
             builder.Property(x => x.ValorPadrao)
                 .IsRequired();
+
+            builder.Property(x => x.IdAcademia)
+                .IsRequired();
         }
     }
 }

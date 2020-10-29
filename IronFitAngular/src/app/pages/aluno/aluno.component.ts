@@ -6,6 +6,8 @@ import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operato
 import { fromEvent } from 'rxjs';
 import { ModalidadeService } from 'src/app/services/modalidade.service';
 import { Aluno } from './aluno.model';
+import { Pagamento } from './pagamento.model';
+import { PagamentoService } from 'src/app/services/pagamento.service';
 
 @Component({
   selector: 'app-aluno',
@@ -16,17 +18,35 @@ export class AlunoComponent implements OnInit, AfterViewInit {
   focus;
   editar = false;
 
+  meses = [
+    {id: 1, nome: 'Janeiro'},
+    {id: 2, nome: 'Fevereiro'},
+    {id: 3, nome: 'Março'},
+    {id: 4, nome: 'Abril'},
+    {id: 5, nome: 'Maio'},
+    {id: 6, nome: 'Junho'},
+    {id: 7, nome: 'Julho'},
+    {id: 8, nome: 'Agosto'},
+    {id: 9, nome: 'Setembro'},
+    {id: 10, nome: 'Outubro'},
+    {id: 11, nome: 'Novembro'},
+    {id: 12, nome: 'Dezembro'},
+  ];
+
   alunos = [];
   modalidades = [];
 
   closeResult: string;
-  @ViewChild('classic3') public templateref: TemplateRef<any>;
+  @ViewChild('classic3') public modalAlunoRef: TemplateRef<any>;
+  @ViewChild('classic4') public modalPagamentoRef: TemplateRef<any>;
   @ViewChild('searchInput') input: ElementRef;
 
   aluno: Aluno = new Aluno();
+  pagamento: Pagamento = new Pagamento();
 
   constructor(
     private alunoService: AlunoService,
+    private pagamentoService: PagamentoService,
     private modalidadeService: ModalidadeService,
     private modalService: NgbModal,
     private toastr: ToastrService) { }
@@ -48,6 +68,14 @@ export class AlunoComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public pagar(): void {
+    this.pagamento.mesReferencia = Number(this.pagamento.mesReferencia);
+    this.pagamentoService.realizarPagamento(this.pagamento).subscribe(
+      () => this.toastr.success('Pagamento realizado com sucesso'),
+      () => this.toastr.error('Houve um erro ao realizar o pagamento')
+    );
+  }
+
   public abrirModalEditar(id: number): void {
     this.editar = true;
     this.alunoService.buscarAluno(id).subscribe(result => {
@@ -59,13 +87,23 @@ export class AlunoComponent implements OnInit, AfterViewInit {
         month: this.aluno.dataNascimento.getMonth(), day: this.aluno.dataNascimento.getDate() };
       this.aluno.dataMatriculaPicker = { year: this.aluno.dataMatricula.getFullYear(),
         month: this.aluno.dataMatricula.getMonth(), day: this.aluno.dataMatricula.getDate() };
-      this.open();
+      this.open('modalAlunoRef');
     });
   }
 
-  open() {
+  public abrirModalPagamento(aluno: Aluno): void {
+    this.pagamento.idAluno = Number(aluno.id);
+
+    const modalidadeAluno = this.modalidades.find(x => x.id === aluno.idModalidade);
+
+    this.pagamento.valor = modalidadeAluno.valorPadrao;
+
+    this.open('modalPagamentoRef');
+  }
+
+  open(modalNome: string) {
     this.modalService
-      .open(this.templateref, {
+      .open(this[modalNome], {
         windowClass: 'modal',
         size: 'lg',
         centered: true,
@@ -73,10 +111,12 @@ export class AlunoComponent implements OnInit, AfterViewInit {
       .result.then(
         () => {
           this.aluno = new Aluno();
+          this.pagamento = new Pagamento();
           this.editar = false;
         },
         () => {
           this.aluno = new Aluno();
+          this.pagamento = new Pagamento();
           this.editar = false;
         }
       );

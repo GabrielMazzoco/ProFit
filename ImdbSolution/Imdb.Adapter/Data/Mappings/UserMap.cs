@@ -19,6 +19,8 @@ namespace IronFit.Adapter.Data.Mappings
             builder.Property(x => x.PasswordHash).IsRequired();
 
             builder.Property(x => x.Admin).IsRequired();
+
+            builder.Property(x => x.Academias).IsRequired();
         }
     }
 }

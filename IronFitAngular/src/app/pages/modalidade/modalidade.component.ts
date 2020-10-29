@@ -14,7 +14,7 @@ export class ModalidadeComponent implements OnInit {
   closeResult: string;
   @ViewChild('classic3') public templateref: TemplateRef<any>;
 
-  modalidade = {nome: '', valorPadrao: '', id: 0};
+  modalidade = {nome: '', valorPadrao: '', id: 0, idAcademia: 0};
 
   constructor(
     private modalidadeService: ModalidadeService,
@@ -27,6 +27,13 @@ export class ModalidadeComponent implements OnInit {
   }
 
   public salvar(): void {
+    this.modalidade.idAcademia = Number(this.modalidade.idAcademia);
+
+    if (this.modalidade.idAcademia === 0) { 
+      this.toastr.info('Selecione uma Academia.');
+      return;
+    }
+
     if (this.modalidade.id === 0) {
       this.salvarModalidade();
     } else {
@@ -56,8 +63,8 @@ export class ModalidadeComponent implements OnInit {
         centered: true,
       })
       .result.then(
-        () => this.modalidade = {nome: '', valorPadrao: '', id: 0},
-        () => this.modalidade = {nome: '', valorPadrao: '', id: 0}
+        () => this.modalidade = {nome: '', valorPadrao: '', id: 0, idAcademia: 0},
+        () => this.modalidade = {nome: '', valorPadrao: '', id: 0, idAcademia: 0}
       );
   }
 

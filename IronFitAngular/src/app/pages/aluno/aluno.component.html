@@ -19,7 +19,7 @@
         <div class="col-xl-3 col-lg-6">
         </div>
         <div class="col-xl-3 col-lg-6">
-          <button class="btn btn-white" (click)="open()">Matricular Aluno</button>
+          <button class="btn btn-white" (click)="open('modalAlunoRef')">Matricular Aluno</button>
         </div> 
       </div>
     </div>
@@ -96,6 +96,65 @@
   </div>
 </ng-template>
 
+<ng-template #classic4 let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title-default">Pagamento</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d(false)">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="input-mes">Mês</label>
+            <select id="input-mes" [(ngModel)]="pagamento.mesReferencia" name="mesReferencia" class="browser-default custom-select">
+              <option value="0">Mês</option>
+              <option *ngFor="let item of meses" value="{{item.id}}">{{item.nome}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="input-ano">Ano</label>
+            <input [(ngModel)]="pagamento.anoReferencia" name="anoReferencia" type="number" id="input-ano" 
+              class="form-control form-control-alternative" placeholder="Ano">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="custom-control custom-checkbox ml-3 mt-5">
+            <input class="custom-control-input" id="customCheck2" type="checkbox" [(ngModel)]="pagamento.mesInteiro">
+            <label class="custom-control-label" for="customCheck2">Mês Inteiro</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="input-quantidadeDias">Quantidade de Dias</label>
+            <input [(ngModel)]="pagamento.quantidadeDias" name="quantidadeDias" type="number" id="input-quantidadeDias" 
+              class="form-control form-control-alternative" placeholder="Quantidade de Dias" disabled="{{pagamento.mesInteiro}}">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="input-valor">Valor</label>
+            <input [(ngModel)]="pagamento.valor" name="valor" type="number" id="input-valor" 
+              class="form-control form-control-alternative" placeholder="Valor">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c(false)">Close</button>
+      <button type="button" class="btn btn-primary" (click)="pagar();c(false)">Save changes</button>
+    </div>
+  </div>
+</ng-template>
+
 <!-- Page content -->
 <div class="container-fluid mt--7">
   <!-- Table -->
@@ -133,6 +192,7 @@
                     </a>
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                       <a class="dropdown-item" (click)="abrirModalEditar(item.id)">Editar</a>
+                      <a class="dropdown-item" (click)="abrirModalPagamento(item)">Pagamento</a>
                       <!-- <a class="dropdown-item" (click)="inativarModalidade(item.id)">Inativar</a> -->
                       <!-- <a class="dropdown-item" href="javascript:void(0)">Something else here</a> -->
                     </div>

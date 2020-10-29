@@ -14,5 +14,7 @@ namespace IronFit.Domain.AuthAggregate.Dtos
         [MaxLength(10, ErrorMessage = "Senha deve conter no maximo 10 caracteres")]
         [MinLength(6, ErrorMessage = "Senha deve conter no minimo 6 caracteres")]
         public string Password { get; set; }
+
+        public string Academias { get; set; }
     }
 }

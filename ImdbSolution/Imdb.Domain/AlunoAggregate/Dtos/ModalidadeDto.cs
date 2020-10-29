@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string Nome { get; set; }
         public decimal ValorPadrao { get; set; }
+        public int IdAcademia { get; set; }
         public bool Active { get; set; } = true;
     }
 }

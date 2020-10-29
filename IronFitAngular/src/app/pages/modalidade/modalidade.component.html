@@ -42,6 +42,17 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-control-label" for="input-academia">Academia</label>
+            <select id="input-academia" [(ngModel)]="modalidade.idAcademia" name="idAcademia" class="browser-default custom-select">
+              <option value="0">Selecione Academia</option>
+              <!-- <option *ngFor="let item of modalidades" value="{{item.id}}">{{item.nome}}</option> -->
+              <option value="1">IronFit</option>
+              <option value="2">ProFit</option>
+            </select>
+          </div>
+        </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c(false)">Close</button>
@@ -64,6 +75,7 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">Nome</th>
+                <th scope="col">Academia</th>
                 <th scope="col">Valor</th>
                 <th scope="col">Status</th>
                 <th scope="col"></th>
@@ -71,16 +83,19 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of modalidades">
-                <th scope="row">
+                <th style="width: 30%;" scope="row">
                   {{item.nome}}
                 </th>
-                <td>
+                <td style="width: 30%;">
+                  {{(item.idAcademia == 1 ? 'IronFit' : 'ProFit')}}
+                </td>
+                <td style="width: 10%;">
                   {{item.valorPadrao}}
                 </td>
-                <td>
+                <td style="width: 10%;">
                   {{(item.active) ? 'Ativo' : 'Inativo'}}
                 </td>
-                <td class="text-right">
+                <td style="width: 10%;" class="text-right">
                   <div ngbDropdown placement="bottom-right">
                     <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
                       <i class="fas fa-ellipsis-v"></i>

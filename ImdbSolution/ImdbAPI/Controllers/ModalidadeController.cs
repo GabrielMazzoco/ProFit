@@ -20,10 +20,6 @@ namespace IronFit.Api.Controllers
         [HttpGet]
         public IActionResult BuscarModalidades()
         {
-            var admin = VerificarAdmin();
-
-            if (!admin) return Forbid();
-
             var modalidades = _modalidadeService.BuscarTodos();
 
             return Ok(modalidades);

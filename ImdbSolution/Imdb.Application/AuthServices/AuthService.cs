@@ -52,7 +52,8 @@ namespace IronFit.Application.AuthServices
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim("Admin", user.Admin.ToString())
+                new Claim("Admin", user.Admin.ToString()),
+                new Claim("Academias", user.Academias) 
             };
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Security:SecretKeyJWT"]));

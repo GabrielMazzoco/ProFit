@@ -7,6 +7,7 @@ namespace IronFit.Domain.AlunoAggregate.Entidades
     {
         public string Nome { get; set; }
         public decimal ValorPadrao { get; set; }
+        public int IdAcademia { get; set; }
 
         public virtual ICollection<Aluno> Alunos { get; set; }
     }

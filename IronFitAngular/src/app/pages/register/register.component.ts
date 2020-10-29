@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  user = { name: '', username: '', password: '' };
+  user = { name: '', username: '', password: '', academias: '' };
 
   constructor(
     private userService: UserService,
@@ -20,6 +20,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   public registrar(): void {
+    if (this.user.academias === '') {
+      this.toastr.info('Selecione uma Academia');
+      return;
+    }
+
     this.userService.registrar(this.user).subscribe(
       () => {
         this.toastr.success('Registrado com sucesso!');

@@ -24,7 +24,8 @@ namespace IronFit.Adapter.Data
                 Admin = true,
                 Name = "Gabriel Mazzoco",
                 UserName = "mazzoco",
-                PasswordHash = BC.HashPassword("mazzoco")
+                PasswordHash = BC.HashPassword("mazzoco"),
+                Academias = "1,2"
             });
 
             modelBuilder.Entity<User>().HasData(new User
@@ -34,7 +35,8 @@ namespace IronFit.Adapter.Data
                 Admin = true,
                 Name = "Brenner Mazzoco",
                 UserName = "brenner",
-                PasswordHash = BC.HashPassword("mazzoco")
+                PasswordHash = BC.HashPassword("mazzoco"),
+                Academias = "1,2"
             });
         }
     }
