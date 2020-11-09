@@ -24,5 +24,13 @@ namespace IronFit.Api.Controllers
 
             return Created("Pagamentos", new { });
         }
+
+        [HttpGet("{aluno}")]
+        public IActionResult BuscarPagamentos([FromRoute] string aluno)
+        {
+            var result = _pagamentoService.GetPagamentos(aluno);
+
+            return Ok(result);
+        }
     }
 }

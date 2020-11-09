@@ -8,5 +8,8 @@
         public int AnoReferencia { get; set; }
         public bool MesInteiro { get; set; }
         public int QuantidadeDias { get; set; }
+        public string Nome { get; set; }
+        public string Modalidade { get; set; }
+        public string Academia { get; set; }
     }
 }

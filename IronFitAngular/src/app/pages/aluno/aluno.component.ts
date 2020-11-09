@@ -8,6 +8,7 @@ import { ModalidadeService } from 'src/app/services/modalidade.service';
 import { Aluno } from './aluno.model';
 import { Pagamento } from './pagamento.model';
 import { PagamentoService } from 'src/app/services/pagamento.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-aluno',
@@ -17,6 +18,9 @@ import { PagamentoService } from 'src/app/services/pagamento.service';
 export class AlunoComponent implements OnInit, AfterViewInit {
   focus;
   editar = false;
+  admin = false;
+  inativarId = 0;
+  status = 0;
 
   meses = [
     {id: 1, nome: 'Janeiro'},
@@ -30,7 +34,7 @@ export class AlunoComponent implements OnInit, AfterViewInit {
     {id: 9, nome: 'Setembro'},
     {id: 10, nome: 'Outubro'},
     {id: 11, nome: 'Novembro'},
-    {id: 12, nome: 'Dezembro'},
+    {id: 12, nome: 'Dezembro'}
   ];
 
   alunos = [];
@@ -39,6 +43,7 @@ export class AlunoComponent implements OnInit, AfterViewInit {
   closeResult: string;
   @ViewChild('classic3') public modalAlunoRef: TemplateRef<any>;
   @ViewChild('classic4') public modalPagamentoRef: TemplateRef<any>;
+  @ViewChild('classic5') public modalInativarRef: TemplateRef<any>;
   @ViewChild('searchInput') input: ElementRef;
 
   aluno: Aluno = new Aluno();
@@ -49,11 +54,13 @@ export class AlunoComponent implements OnInit, AfterViewInit {
     private pagamentoService: PagamentoService,
     private modalidadeService: ModalidadeService,
     private modalService: NgbModal,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.buscarAlunos();
     this.buscarModalidades();
+    this.admin = this.authService.ehAdmin();
   }
 
   ngAfterViewInit(): void {
@@ -72,7 +79,16 @@ export class AlunoComponent implements OnInit, AfterViewInit {
     this.pagamento.mesReferencia = Number(this.pagamento.mesReferencia);
     this.pagamentoService.realizarPagamento(this.pagamento).subscribe(
       () => this.toastr.success('Pagamento realizado com sucesso'),
-      () => this.toastr.error('Houve um erro ao realizar o pagamento')
+      () => this.toastr.error('Houve um erro ao realizar o pagamento'),
+      () => this.buscarAlunos()
+    );
+  }
+
+  public inativar(): void {
+    this.alunoService.inativarAluno(this.inativarId).subscribe(
+      () => this.toastr.success('Aluno inativado com sucesso'),
+      () => this.toastr.error('Houve um erro ao realizar a inativação'),
+      () => this.buscarAlunos()
     );
   }
 
@@ -101,6 +117,19 @@ export class AlunoComponent implements OnInit, AfterViewInit {
     this.open('modalPagamentoRef');
   }
 
+  public abrirModalInativar(aluno: Aluno): void {
+    this.inativarId = Number(aluno.id);
+
+    this.open('modalInativarRef');
+  }
+
+  public selectChange(): void {
+    const search = this.input.nativeElement.value;
+    this.alunoService.buscarAlunos(search, this.status).subscribe((response) => {
+      this.alunos = response;
+    });
+  }
+
   open(modalNome: string) {
     this.modalService
       .open(this[modalNome], {
@@ -113,17 +142,19 @@ export class AlunoComponent implements OnInit, AfterViewInit {
           this.aluno = new Aluno();
           this.pagamento = new Pagamento();
           this.editar = false;
+          this.inativarId = 0;
         },
         () => {
           this.aluno = new Aluno();
           this.pagamento = new Pagamento();
           this.editar = false;
+          this.inativarId = 0;
         }
       );
   }
 
   private buscarAlunos(): void {
-    this.alunoService.buscarAlunos('').subscribe((response) => {
+    this.alunoService.buscarAlunos('', this.status).subscribe((response) => {
       this.alunos = response;
     });
   }
@@ -150,10 +181,10 @@ export class AlunoComponent implements OnInit, AfterViewInit {
     fromEvent<any>(this.input.nativeElement, 'keyup')
       .pipe(
         map(event => event.target.value),
-        debounceTime(200),
+        debounceTime(500),
         distinctUntilChanged(),
         switchMap(search => {
-          return this.alunoService.buscarAlunos(search);
+          return this.alunoService.buscarAlunos(search, this.status);
         })
       ).subscribe((data) => {
         this.alunos = data;

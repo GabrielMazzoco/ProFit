@@ -17,21 +17,28 @@ export const ROUTES: RouteInfo[] = [
     class: '',
     admin: true
   },
-  { path: '/icons', title: 'Icons', icon: 'ni-planet text-blue', class: '', admin: false },
+  // { path: '/icons', title: 'Icons', icon: 'ni-planet text-blue', class: '', admin: false },
   // { path: '/maps', title: 'Maps', icon: 'ni-pin-3 text-orange', class: '', admin: false },
-  {
-    path: '/user-profile',
-    title: 'User profile',
-    icon: 'ni-single-02 text-yellow',
-    class: '',
-    admin: false
-  },
+  // {
+  //   path: '/user-profile',
+  //   title: 'User profile',
+  //   icon: 'ni-single-02 text-yellow',
+  //   class: '',
+  //   admin: false
+  // },
   {
     path: '/aluno',
     title: 'Alunos',
     icon: 'ni-single-02 text-black',
     class: '',
     admin: false
+  },
+  {
+    path: '/pagamento',
+    title: 'Pagamentos',
+    icon: 'ni-money-coins text-black',
+    class: '',
+    admin: true
   },
   // {
   //   path: '/tables',
@@ -51,7 +58,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '/register',
     title: 'Registrar Funcionário',
-    icon: 'ni-circle-08 text-pink',
+    icon: 'ni-badge text-pink',
     class: '',
     admin: true
   }

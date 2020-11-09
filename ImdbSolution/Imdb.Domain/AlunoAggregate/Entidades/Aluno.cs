@@ -10,6 +10,11 @@ namespace IronFit.Domain.AlunoAggregate.Entidades
         public DateTime DataNascimento { get; set; }
         public string Cpf { get; set; }
         public DateTime DataMatricula { get; set; }
+        public string Ddd { get; set; }
+        public string NumeroTelefone { get; set; }
+        public string Cidade { get; set; }
+        public string Rua { get; set; }
+        public int? Numero { get; set; }
 
         //Fks
         public int IdModalidade { get; set; }

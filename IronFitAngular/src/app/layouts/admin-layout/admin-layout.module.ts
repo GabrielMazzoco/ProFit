@@ -14,6 +14,7 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalidadeComponent } from 'src/app/pages/modalidade/modalidade.component';
 import { AlunoComponent } from 'src/app/pages/aluno/aluno.component';
+import { PagamentoComponent } from 'src/app/pages/pagamento/pagamento.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AlunoComponent } from 'src/app/pages/aluno/aluno.component';
     IconsComponent,
     MapsComponent,
     ModalidadeComponent,
-    AlunoComponent
+    AlunoComponent,
+    PagamentoComponent
   ]
 })
 

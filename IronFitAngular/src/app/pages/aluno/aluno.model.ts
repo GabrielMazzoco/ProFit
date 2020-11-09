@@ -7,6 +7,11 @@ export class Aluno {
     dataMatriculaPicker: any;
     dataMatricula: Date;
     idModalidade: number;
+    ddd: string;
+    numeroTelefone: string;
+    cidade: string;
+    rua: string;
+    numero: number;
 
     constructor() {
         this.idModalidade = 0;

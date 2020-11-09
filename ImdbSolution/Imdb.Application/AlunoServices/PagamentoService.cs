@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using IronFit.Domain.AlunoAggregate.Dtos;
 using IronFit.Domain.AlunoAggregate.Entidades;
@@ -46,6 +47,13 @@ namespace IronFit.Application.AlunoServices
             _pagamentoRepository.Create(pagamento);
 
             _unityOfWork.Commit();
+        }
+
+        public IEnumerable<PagamentoDto> GetPagamentos(string aluno)
+        {
+            var result = _pagamentoRepository.GetPagamentos(aluno);
+
+            return result;
         }
     }
 }

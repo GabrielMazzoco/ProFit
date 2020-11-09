@@ -15,4 +15,11 @@ export class PagamentoService extends BaseService {
   public realizarPagamento(pagamento: any) {
     return this.post(this.urlAuth, pagamento);
   }
+
+  public buscarPagamentos(nome: string) {
+    if (nome) {
+      return this.get(`${this.urlAuth}/${nome}`);
+    }
+    return this.get(`${this.urlAuth}/ `);
+  }
 }

@@ -15,6 +15,11 @@
           </div>
         </div>
         <div class="col-xl-3 col-lg-6">
+          <select id="input-status" [(ngModel)]="status" name="status" class="browser-default custom-select" (ngModelChange)="selectChange()">
+            <option value="0">Todos</option>
+            <option value="1">Pagamento em Dia</option>
+            <option value="-1">Pagamento Atrasado</option>
+          </select>
         </div>
         <div class="col-xl-3 col-lg-6">
         </div>
@@ -26,6 +31,7 @@
   </div>
 </div>
 
+<!-- Modal Aluno -->
 <ng-template #classic3 let-c="close" let-d="dismiss">
   <div class="modal-content">
     <div class="modal-header">
@@ -40,13 +46,13 @@
             <div class="form-group">
               <label class="form-control-label" for="input-nome">Nome</label>
               <input [(ngModel)]="aluno.nome" name="nome" type="text" id="input-nome" 
-                class="form-control form-control-alternative" placeholder="Nome" disabled="{{editar}}">
+                class="form-control form-control-alternative" placeholder="Nome" disabled="{{editar && !admin}}">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label class="form-control-label" for="input-cpf">Cpf</label>
-              <input [(ngModel)]="aluno.cpf" name="cpf" type="text" id="input-cpf" 
+              <input [(ngModel)]="aluno.cpf" name="cpf" type="text" id="input-cpf" maxlength="11"
                 class="form-control form-control-alternative" placeholder="Cpf">
             </div>
           </div>
@@ -61,7 +67,7 @@
                 </div>
                 <input class="form-control datepicker" placeholder="Select date" name="dataNascimento" [(ngModel)]="aluno.dataNascimentoPicker" 
                   ngbDatepicker #g="ngbDatepicker" (click)="g.toggle()" type="text" id="dataNascimento" [minDate]="{year: 1910, month: 1, day: 1}"
-                  [maxDate]="{year: 2020, month: 12, day: 31}" disabled="{{editar}}"/>
+                  [maxDate]="{year: 2020, month: 12, day: 31}" disabled="{{editar && !admin}}"/>
               </div>
             </div>
           </div>
@@ -74,8 +80,49 @@
                 </div>
                 <input class="form-control datepicker" placeholder="Select date" name="dataMatricula" [(ngModel)]="aluno.dataMatriculaPicker" 
                   ngbDatepicker #h="ngbDatepicker" (click)="h.toggle()" type="text" id="dataMatricula" [minDate]="{year: 1910, month: 1, day: 1}"
-                  [maxDate]="{year: 2030, month: 12, day: 31}" disabled="{{editar}}"/>
+                  [maxDate]="{year: 2030, month: 12, day: 31}" disabled="{{editar && !admin}}"/>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-ddd">DDD</label>
+              <input [(ngModel)]="aluno.ddd" name="ddd" type="text" id="input-ddd" maxlength="2"
+                class="form-control form-control-alternative" placeholder="DDD">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-numeroTelefone">Número Telefone</label>
+              <input [(ngModel)]="aluno.numeroTelefone" name="numeroTelefone" type="text" id="input-numeroTelefone" maxlength="9"
+                class="form-control form-control-alternative" placeholder="Número Telefone">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-cidade">Cidade</label>
+              <input [(ngModel)]="aluno.cidade" name="cidade" type="text" id="input-cidade" maxlength="100"
+                class="form-control form-control-alternative" placeholder="Cidade">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-rua">Rua</label>
+              <input [(ngModel)]="aluno.rua" name="rua" type="text" id="input-rua" maxlength="300"
+                class="form-control form-control-alternative" placeholder="Rua">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-numero">Número</label>
+              <input [(ngModel)]="aluno.numero" name="numero" type="number" id="input-numero"
+                class="form-control form-control-alternative" placeholder="Número">
             </div>
           </div>
         </div>
@@ -96,6 +143,7 @@
   </div>
 </ng-template>
 
+<!-- Modal Pagamento -->
 <ng-template #classic4 let-c="close" let-d="dismiss">
   <div class="modal-content">
     <div class="modal-header">
@@ -155,6 +203,27 @@
   </div>
 </ng-template>
 
+<!-- Modal Inativar -->
+<ng-template #classic5 let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title-default">Inativar</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d(false)">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="align-center ml-5"><h3>Deseja realmente Inativar esse Aluno ?</h3></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c(false)">Não</button>
+      <button type="button" class="btn btn-primary" (click)="inativar();c(false)">Sim</button>
+    </div>
+  </div>
+</ng-template>
+
 <!-- Page content -->
 <div class="container-fluid mt--7">
   <!-- Table -->
@@ -170,22 +239,30 @@
               <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">Modalidade</th>
+                <th scope="col">Data Próximo Pagamento</th>
+                <th scope="col">Valor</th>
                 <th scope="col">Status</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of alunos">
-                <th style="width: 40%;" scope="row">
+                <th style="width: 30%;" scope="row">
                   {{item.nome}}
                 </th>
-                <td style="width: 25%;">
+                <td style="width: 20%;">
                   {{item.modalidade}}
                 </td>
-                <td style="width: 25%;">
+                <td style="width: 20%;">
+                  {{item.dataProximoPagamento}}
+                </td>
+                <td style="width: 15%;">
+                  {{item.valor}}
+                </td>
+                <td style="width: 10%;">
                   {{(item.active) ? 'Ativo' : 'Inativo'}}
                 </td>
-                <td style="width: 10%;" class="text-right">
+                <td style="width: 5%;" class="text-right">
                   <div ngbDropdown placement="bottom-right">
                     <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
                       <i class="fas fa-ellipsis-v"></i>
@@ -193,6 +270,7 @@
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                       <a class="dropdown-item" (click)="abrirModalEditar(item.id)">Editar</a>
                       <a class="dropdown-item" (click)="abrirModalPagamento(item)">Pagamento</a>
+                      <a *ngIf="item.active" class="dropdown-item" (click)="abrirModalInativar(item)">Inativar</a>
                       <!-- <a class="dropdown-item" (click)="inativarModalidade(item.id)">Inativar</a> -->
                       <!-- <a class="dropdown-item" href="javascript:void(0)">Something else here</a> -->
                     </div>
@@ -206,4 +284,3 @@
     </div>
   </div>
 </div>
-

@@ -12,11 +12,11 @@ export class AlunoService extends BaseService {
     this.urlAuth = environment.urlApi + 'aluno';
   }
 
-  public buscarAlunos(nome: string) {
+  public buscarAlunos(nome: string, status: number) {
     if (nome) {
-      return this.get(`${this.urlAuth}/filter/${nome}`);
+      return this.get(`${this.urlAuth}/filter/${status}/${nome}`);
     }
-    return this.get(`${this.urlAuth}/filter/ `);
+    return this.get(`${this.urlAuth}/filter/${status}/ `);
   }
 
   public buscarAluno(id: number) {

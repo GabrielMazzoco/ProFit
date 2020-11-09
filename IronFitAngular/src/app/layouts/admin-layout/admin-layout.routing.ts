@@ -7,6 +7,7 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { ModalidadeComponent } from 'src/app/pages/modalidade/modalidade.component';
 import { AlunoComponent } from 'src/app/pages/aluno/aluno.component';
+import { PagamentoComponent } from 'src/app/pages/pagamento/pagamento.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -15,5 +16,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'modalidade',     component: ModalidadeComponent },
-    { path: 'aluno',          component: AlunoComponent }
+    { path: 'aluno',          component: AlunoComponent },
+    { path: 'pagamento',      component: PagamentoComponent }
 ];

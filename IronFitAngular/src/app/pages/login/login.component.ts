@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
+
   ngOnDestroy() {
   }
 
@@ -26,6 +27,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(this.user).subscribe(
       () => this.toastr.success('Logado com sucesso!'),
       () => this.toastr.error('Ocorreu um erro ao tentar logar.'),
-      () => this.router.navigate(['/user-profile']));
+      () => this.router.navigate(['/aluno']));
   }
 }

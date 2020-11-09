@@ -22,6 +22,16 @@ namespace IronFit.Adapter.Data.Mappings
 
             builder.Property(x => x.IdModalidade).IsRequired();
 
+            builder.Property(x => x.Ddd).HasMaxLength(2).IsRequired(false);
+
+            builder.Property(x => x.NumeroTelefone).HasMaxLength(9).IsRequired(false);
+
+            builder.Property(x => x.Cidade).HasMaxLength(100).IsRequired(false);
+
+            builder.Property(x => x.Rua).HasMaxLength(300).IsRequired(false);
+
+            builder.Property(x => x.Numero).IsRequired(false);
+
             builder.HasOne(x => x.Modalidade)
                 .WithMany(x => x.Alunos)
                 .HasForeignKey(x => x.IdModalidade);

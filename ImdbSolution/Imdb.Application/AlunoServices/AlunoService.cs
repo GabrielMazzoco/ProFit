@@ -34,9 +34,9 @@ namespace IronFit.Application.AlunoServices
             return _mapper.Map<IEnumerable<AlunoDto>>(alunos);
         }
 
-        public IEnumerable<AlunoForGetDto> BuscarTodosPorNome(string nome)
+        public IEnumerable<AlunoForGetDto> BuscarTodosPorNome(string nome, int status)
         {
-            var alunos = _alunoRepository.GetAlunos(nome);
+            var alunos = _alunoRepository.GetAlunos(nome, status);
 
             return alunos;
         }

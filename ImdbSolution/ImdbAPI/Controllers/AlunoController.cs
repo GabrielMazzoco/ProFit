@@ -25,10 +25,10 @@ namespace IronFit.Api.Controllers
             return Ok(modalidades);
         }
 
-        [HttpGet("filter/{nome}")]
-        public IActionResult BuscarTodos([FromRoute] string nome)
+        [HttpGet("filter/{status}/{nome}")]
+        public IActionResult BuscarTodos([FromRoute] string nome, [FromRoute] int status)
         {
-            var modalidades = _alunoService.BuscarTodosPorNome(nome);
+            var modalidades = _alunoService.BuscarTodosPorNome(nome, status);
 
             return Ok(modalidades);
         }
