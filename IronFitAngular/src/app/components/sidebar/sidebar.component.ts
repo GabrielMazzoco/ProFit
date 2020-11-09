@@ -17,15 +17,6 @@ export const ROUTES: RouteInfo[] = [
     class: '',
     admin: true
   },
-  // { path: '/icons', title: 'Icons', icon: 'ni-planet text-blue', class: '', admin: false },
-  // { path: '/maps', title: 'Maps', icon: 'ni-pin-3 text-orange', class: '', admin: false },
-  // {
-  //   path: '/user-profile',
-  //   title: 'User profile',
-  //   icon: 'ni-single-02 text-yellow',
-  //   class: '',
-  //   admin: false
-  // },
   {
     path: '/aluno',
     title: 'Alunos',
@@ -40,14 +31,6 @@ export const ROUTES: RouteInfo[] = [
     class: '',
     admin: true
   },
-  // {
-  //   path: '/tables',
-  //   title: 'Tables',
-  //   icon: 'ni-bullet-list-67 text-red',
-  //   class: '',
-  //   admin: false
-  // },
-  // { path: '/login', title: 'Login', icon: 'ni-key-25 text-info', class: '', admin: false },
   {
     path: '/modalidade',
     title: 'Modalidades',
