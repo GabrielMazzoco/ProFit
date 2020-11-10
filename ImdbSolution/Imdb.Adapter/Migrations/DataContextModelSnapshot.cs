@@ -208,7 +208,7 @@ namespace IronFit.Adapter.Migrations
                             Active = true,
                             Admin = true,
                             Name = "Gabriel Mazzoco",
-                            PasswordHash = "$2a$11$//iwnHrjPahU.1yVYPTKmeyBw.VdyEa.BLTWU6VfDerFlByXkw9d2",
+                            PasswordHash = "$2a$11$Blz/XOhZmy0HR5P87fm62uqRQD.QK07Z2GyIusLP680Dt3ySH4VHC",
                             UserName = "mazzoco"
                         },
                         new
@@ -218,7 +218,7 @@ namespace IronFit.Adapter.Migrations
                             Active = true,
                             Admin = true,
                             Name = "Brenner Mazzoco",
-                            PasswordHash = "$2a$11$L1Z3PpMH7OlQaM8gCKVBnuEl3ZU/PIqZmwMFAZVgu7Pu0s5rHmr4y",
+                            PasswordHash = "$2a$11$MllzrW5U.yFb8zWQhXbzr.FegtG78OVoc/RFy6MmJEvy7HIhInB.6",
                             UserName = "brenner"
                         });
                 });

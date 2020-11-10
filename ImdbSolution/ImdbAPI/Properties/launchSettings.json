@@ -17,6 +17,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "IIS Express Prod": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "index.html",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
     "IronFitAPI": {
       "commandName": "Project",
       "launchBrowser": true,

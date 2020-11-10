@@ -4,13 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Migrations\20201021113929_GymTables.cs" />
-    <Compile Remove="Migrations\20201021113929_GymTables.Designer.cs" />
-    <Compile Remove="Migrations\20201028105222_Ajustes.cs" />
-    <Compile Remove="Migrations\20201028105222_Ajustes.Designer.cs" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="BCrypt.Net-Next" Version="4.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />

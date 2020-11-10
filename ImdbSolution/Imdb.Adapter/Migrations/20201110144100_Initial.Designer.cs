@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IronFit.Adapter.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201021114039_GymTables")]
-    partial class GymTables
+    [Migration("20201110144100_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,10 @@ namespace IronFit.Adapter.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Cidade")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
                     b.Property<string>("Cpf")
                         .HasColumnType("nvarchar(max)");
 
@@ -40,6 +44,10 @@ namespace IronFit.Adapter.Migrations
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Ddd")
+                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(2);
+
                     b.Property<int>("IdModalidade")
                         .HasColumnType("int");
 
@@ -47,6 +55,17 @@ namespace IronFit.Adapter.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
+
+                    b.Property<int?>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NumeroTelefone")
+                        .HasColumnType("nvarchar(9)")
+                        .HasMaxLength(9);
+
+                    b.Property<string>("Rua")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
 
                     b.HasKey("Id");
 
@@ -97,6 +116,9 @@ namespace IronFit.Adapter.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<int>("IdAcademia")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
@@ -132,6 +154,9 @@ namespace IronFit.Adapter.Migrations
                     b.Property<int>("MesReferencia")
                         .HasColumnType("int");
 
+                    b.Property<int>("QuantidadeDias")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
@@ -148,6 +173,10 @@ namespace IronFit.Adapter.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Academias")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -172,6 +201,28 @@ namespace IronFit.Adapter.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Academias = "1,2",
+                            Active = true,
+                            Admin = true,
+                            Name = "Gabriel Mazzoco",
+                            PasswordHash = "$2a$11$Blz/XOhZmy0HR5P87fm62uqRQD.QK07Z2GyIusLP680Dt3ySH4VHC",
+                            UserName = "mazzoco"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Academias = "1,2",
+                            Active = true,
+                            Admin = true,
+                            Name = "Brenner Mazzoco",
+                            PasswordHash = "$2a$11$MllzrW5U.yFb8zWQhXbzr.FegtG78OVoc/RFy6MmJEvy7HIhInB.6",
+                            UserName = "brenner"
+                        });
                 });
 
             modelBuilder.Entity("IronFit.Domain.AlunoAggregate.Entidades.Aluno", b =>
